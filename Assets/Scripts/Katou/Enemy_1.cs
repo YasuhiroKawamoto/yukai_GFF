@@ -24,13 +24,15 @@ public class Enemy_1 : MonoBehaviour
     public int moveDistance = 1;          //片道の距離
     public DIRECTION startDirection       //開始時の方向
                         = DIRECTION.LEFT;
-    public float jump = 1.0f;             //ジャンプ力
+    public float jumpHeight = 1.0f;       //ジャンプ力
+    public float jumpSpeed = 1.0f;        //ジャンプ時のスピード
     public LayerMask groundLayer;         //Linecastで判定するLayer
 
     private float countDistance = 0;      //距離のカウント
     private float x = 1;                  //右・左
-    private bool isGround = true;         //足元が地面かどうかの判定
-    public bool isDiscovery = true;
+    private bool isGround = false;        //足元が地面かどうかの判定
+    public bool isDiscovery = false;      //プレイヤーを発見したかどうかの判定
+
 
     /*--開始時に呼び出される--*/
     void Start ()
@@ -41,46 +43,62 @@ public class Enemy_1 : MonoBehaviour
         searchArea = GetComponent<SearchArea>();
 
         //初期設定
+        //開始時の方向を決定
         x = (int)startDirection;
-        countDistance = moveDistance/2;
     }
 
 
     /*--毎フレーム呼び出される--*/
     void Update ()
     {
-        // 移動させる
-        rb2d.velocity = new Vector2(x * enemy_base.speed, rb2d.velocity.y);
-
+        //足元が地面かどうかの判定
+        isGround = Physics2D.Linecast(
+        transform.position + transform.up * 0.5f,
+        transform.position - transform.up * 0.5f,
+        groundLayer);
+ 
         /*--プレイヤーを発見したかどうかの判定--*/
         if (isDiscovery)
-        {
-            //足元が地面かどうかの判定
-            isGround = Physics2D.Linecast(
-            transform.position + transform.up * 0.5f,
-            transform.position - transform.up * 0.5f,
-            groundLayer);
+        {        
+            /*プレイヤーを発見している場合*/
 
+            // 移動させる
+            rb2d.velocity = new Vector2(x * jumpSpeed, rb2d.velocity.y);
+            
+            /*--足元が地面かどうかの判定--*/
             if (isGround)
             {
-                rb2d.AddForce(Vector2.up * jump);
-
+                //足元が地面の場合
                 //ジャンプ
+                rb2d.AddForce(Vector2.up * jumpHeight);
+
+                //地面の判定を外す
                 isGround = false;
             }
         }
-
-        //移動距離をカウント
-        countDistance += enemy_base.speed;
-
-        /*--移動距離が規定値を超えた場合--*/
-        if (countDistance >= moveDistance)
+        else
         {
-            //方向を変える
-            x *= -1;
+            /*プレイヤーを発見していない場合*/
 
-            //カウントをリセットする
-            countDistance = 0;
+            /*--足元が地面がどうかの判定--*/
+            if (isGround)
+            {
+                // 移動させる
+                rb2d.velocity = new Vector2(x * enemy_base.speed, rb2d.velocity.y);
+            }
+
+            //移動距離をカウント
+            countDistance += enemy_base.speed;
+
+            /*--移動距離が規定値を超えた場合--*/
+            if (countDistance >= moveDistance)
+            {
+                //方向を変える
+                x *= -1;
+
+                //カウントをリセットする
+                countDistance = 0;
+            }
         }
     }
 }

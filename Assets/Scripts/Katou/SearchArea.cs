@@ -11,25 +11,24 @@ public class SearchArea : MonoBehaviour
 {
     Enemy_1 enemy;
 
-    //プレイヤーを発見したかどうかのフラグ
-    public bool isDiscovery = false;
-
-
     /*--開始時に呼び出される--*/
     void Start ()
     {
+        //親のコンポーネントを取得
         enemy = GetComponentInParent<Enemy_1>();
 	}
 
     /*--当たった瞬間呼ばれる--*/
     void OnTriggerEnter2D(Collider2D c)
     {
+        //プレイヤーを発見！
         enemy.isDiscovery = true;
     }
 
     /*--当たって離れた時に呼ばれる--*/
     void OnTriggerExit2D(Collider2D c)
     {
+        //プレイヤーを見失う
         enemy.isDiscovery = false;
     }
 }
