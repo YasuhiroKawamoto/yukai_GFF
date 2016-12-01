@@ -20,7 +20,7 @@ public class Enemy_base : MonoBehaviour
     public int power = 1;
 
     //接触時のダメージ
-    public int contactPower = 0;
+    public int contactPower = 1;
 
 
     // 開始時に呼ばれる
