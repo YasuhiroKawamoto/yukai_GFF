@@ -8,17 +8,19 @@ enum direction_t
 public class Enemy : MonoBehaviour
 {
     [SerializeField]
-    private int hp;          // 体力
+    private int m_hp;          // 体力
     [SerializeField]
-    private int atk;         // 攻撃力(接触ダメージ)
+    private int m_atk;         // 攻撃力(接触ダメージ)
+    [SerializeField,Range(0,50)]
+    private int m_spd_x;         // x速度
+    [SerializeField, Range(0, 200)]
+    private int m_spd_y;         // y速度
     [SerializeField]
-    private int spd;         // 移動速度
+    private Transform player;         // プレイヤートランスフォーム
 
-    private Player player_scr;
+    private direction_t m_direction;    // 向き
 
-    private direction_t direction;    // 向き
-
-    private bool isLanded = true;
+    private bool m_isLanded = true;
 
     // Use this for initialization
     void Start()
@@ -30,24 +32,24 @@ public class Enemy : MonoBehaviour
     void Update()
     {
         // プレイヤーのいる方向を判定
-        //if(player_scr.transform.position.x <= transform.position.x)
-        //{
-        //    direction = direction_t.LEFT;
-        //}
-        //else
-        //{
-        //    direction = direction_t.RIGHT;
-        //}
+        if (player.position.x <= transform.position.x)
+        {
+            m_direction = direction_t.LEFT;
+        }
+        else
+        {
+            m_direction = direction_t.RIGHT;
+        }
 
         // 地面に着地しているとき基本移動(プレイヤのいる方向へ跳ぶ)
-        if (isLanded)
+        if (m_isLanded)
         {
-            GetComponent<Rigidbody2D>().AddForce(new Vector2(-1 * 20, 150));
-            isLanded = false;
+            GetComponent<Rigidbody2D>().AddForce(new Vector2((int)m_direction * m_spd_x, m_spd_y));
+            m_isLanded = false;
         }
 
         // 消滅判定
-        if (hp <= 0)
+        if (m_hp <= 0)
         {
             // 消滅処理
             Destroy(gameObject);
@@ -59,7 +61,7 @@ public class Enemy : MonoBehaviour
     {
         if (coll.gameObject.tag == "Land")
         {
-            isLanded = true;
+            m_isLanded = true;
         }
     }
 }
