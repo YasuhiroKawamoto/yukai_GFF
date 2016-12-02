@@ -31,7 +31,7 @@ public class Enemy_1 : MonoBehaviour
     private float countDistance = 0;      //距離のカウント
     private float x = 1;                  //右・左
     private bool isGround = false;        //足元が地面かどうかの判定
-    public bool isDiscovery = false;      //プレイヤーを発見したかどうかの判定
+    private bool isDiscovery = false;      //プレイヤーを発見したかどうかの判定
 
 
     /*--開始時に呼び出される--*/
@@ -40,7 +40,9 @@ public class Enemy_1 : MonoBehaviour
         //キャッシュ
         enemy_base = GetComponent<Enemy_base>();
         rb2d = GetComponent<Rigidbody2D>();
-        searchArea = GetComponent<SearchArea>();
+
+        //子のコンポーネントを取得
+        searchArea = GetComponentInChildren<SearchArea>();
 
         //初期設定
         //開始時の方向を決定
@@ -57,10 +59,13 @@ public class Enemy_1 : MonoBehaviour
         transform.position - transform.up * 0.5f,
         groundLayer);
  
+        //isDiscovery=searchArea.
         /*--プレイヤーを発見したかどうかの判定--*/
         if (isDiscovery)
         {        
             /*プレイヤーを発見している場合*/
+
+            //プレイヤーとの位置関係を確認
 
             // 移動させる
             rb2d.velocity = new Vector2(x * jumpSpeed, rb2d.velocity.y);
@@ -102,3 +107,4 @@ public class Enemy_1 : MonoBehaviour
         }
     }
 }
+
