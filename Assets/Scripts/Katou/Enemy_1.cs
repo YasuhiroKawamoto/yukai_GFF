@@ -29,9 +29,9 @@ public class Enemy_1 : MonoBehaviour
     public LayerMask groundLayer;         //Linecastで判定するLayer
 
     private float countDistance = 0;      //距離のカウント
-    private float x = 1;                  //右・左
+    private int x = 1;                  //右・左
     private bool isGround = false;        //足元が地面かどうかの判定
-    private bool isDiscovery = false;      //プレイヤーを発見したかどうかの判定
+    private bool isDiscovery = false;     //プレイヤーを発見したかどうかの判定
 
 
     /*--開始時に呼び出される--*/
@@ -58,14 +58,17 @@ public class Enemy_1 : MonoBehaviour
         transform.position + transform.up * 0.5f,
         transform.position - transform.up * 0.5f,
         groundLayer);
- 
-        //isDiscovery=searchArea.
+
+        //プレイヤーを発見しているかどうかの判定
+        isDiscovery = searchArea.m_IsDiscovery;
+
         /*--プレイヤーを発見したかどうかの判定--*/
         if (isDiscovery)
-        {        
+        {
             /*プレイヤーを発見している場合*/
 
-            //プレイヤーとの位置関係を確認
+            //プレイヤーのいる方向を向かせる
+            SetDerection();
 
             // 移動させる
             rb2d.velocity = new Vector2(x * jumpSpeed, rb2d.velocity.y);
@@ -104,6 +107,23 @@ public class Enemy_1 : MonoBehaviour
                 //カウントをリセットする
                 countDistance = 0;
             }
+        }
+    }
+
+
+    /*--プレイヤーのいる方向を向かせる--*/
+    void SetDerection()
+    {
+        float enemy_x = gameObject.transform.position.x;
+        float player_x = searchArea.m_HitPos.x;
+
+        if (player_x > enemy_x)
+        {
+            x = (int)DIRECTION.RIGHT;
+        }
+        else
+        {
+            x = (int)DIRECTION.LEFT;
         }
     }
 }

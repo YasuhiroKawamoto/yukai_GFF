@@ -50,4 +50,6 @@ public class Enemy_move : MonoBehaviour
             countDistance = 0;
         }
     }
+
+    
 }

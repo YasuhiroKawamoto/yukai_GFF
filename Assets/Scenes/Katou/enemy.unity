@@ -220,35 +220,6 @@ Prefab:
       propertyPath: m_Name
       value: Enemy (3)
       objectReference: {fileID: 0}
-    - target: {fileID: 114000012171987902, guid: 84f098da3b0156f4db2dd8748856738c,
-        type: 2}
-      propertyPath: contactPower
-      value: 32
-      objectReference: {fileID: 0}
-    - target: {fileID: 114000010829580310, guid: 84f098da3b0156f4db2dd8748856738c,
-        type: 2}
-      propertyPath: jumpSpeed
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 114000010829580310, guid: 84f098da3b0156f4db2dd8748856738c,
-        type: 2}
-      propertyPath: jumpHeight
-      value: 200
-      objectReference: {fileID: 0}
-    - target: {fileID: 114000010829580310, guid: 84f098da3b0156f4db2dd8748856738c,
-        type: 2}
-      propertyPath: moveDistance
-      value: 500
-      objectReference: {fileID: 0}
-    - target: {fileID: 114000010829580310, guid: 84f098da3b0156f4db2dd8748856738c,
-        type: 2}
-      propertyPath: startDirection
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1000012326606014, guid: 84f098da3b0156f4db2dd8748856738c, type: 2}
-      propertyPath: m_Layer
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 84f098da3b0156f4db2dd8748856738c, type: 2}
   m_IsPrefabParent: 0
@@ -332,10 +303,6 @@ Prefab:
     - target: {fileID: 4000013741859558, guid: e29252ffe91de1042b545d9e37ec6b13, type: 2}
       propertyPath: m_RootOrder
       value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 1000014080056196, guid: e29252ffe91de1042b545d9e37ec6b13, type: 2}
-      propertyPath: m_Layer
-      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e29252ffe91de1042b545d9e37ec6b13, type: 2}
