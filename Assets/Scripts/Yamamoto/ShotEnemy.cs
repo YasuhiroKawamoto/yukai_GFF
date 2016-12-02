@@ -3,10 +3,6 @@ using System.Collections;
 
 public class ShotEnemy : MonoBehaviour
 {
-    [SerializeField ,Range(0,10)]
-    private int hp_;          // 体力
-    [SerializeField]
-    private int atk_;         // 攻撃力(接触ダメージ)
     [SerializeField]
     private GameObject bullet_;  // 弾
     [SerializeField,Range(0.1f,5.0f)]
@@ -38,13 +34,5 @@ public class ShotEnemy : MonoBehaviour
     // 更新処理
 	void Update ()
     {
-        // 消滅判定
-        if (hp_ <= 0)
-        {
-            // 消滅処理
-            Destroy(gameObject);
-        }
     }
-
-    // 向きを取得
 }

@@ -22,6 +22,7 @@ GameObject:
   - 212: {fileID: 212000013999187200}
   - 50: {fileID: 50000012651852564}
   - 114: {fileID: 114000013705408354}
+  - 114: {fileID: 114000010269866118}
   m_Layer: 0
   m_Name: ShotEnemy
   m_TagString: Untagged
@@ -59,6 +60,21 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &114000010269866118
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000013760854222}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c6fc1c52eb1eb014b8567fa3b92a6df4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hp: 1
+  speed: 0
+  power: 1
+  contactPower: 1
 --- !u!114 &114000013705408354
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -70,8 +86,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b7e939df30616640a0a1ce05448970d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp_: 1
-  atk_: 0
   bullet_: {fileID: 1000010392983612, guid: 153e0503660881647958da418e275102, type: 2}
   bulletDelayTime__: 3
 --- !u!212 &212000013999187200
