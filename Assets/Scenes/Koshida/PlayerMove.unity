@@ -100,7 +100,7 @@ GameObject:
   - 4: {fileID: 254720901}
   - 212: {fileID: 254720900}
   - 61: {fileID: 254720899}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -290,6 +290,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 10
+  jump_height: 15
+  is_jump: 0
 --- !u!1 &1643347379
 GameObject:
   m_ObjectHideFlags: 0
