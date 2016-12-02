@@ -24,7 +24,7 @@ GameObject:
   - 50: {fileID: 50000012729527834}
   - 114: {fileID: 114000012171987902}
   - 114: {fileID: 114000010829580310}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -133,11 +133,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveDistance: 500
   startDirection: 1
-  jumpHeight: 200
-  jumpSpeed: 10
+  jumpHeight: 400
+  jumpSpeed: 8
   groundLayer:
     serializedVersion: 2
-    m_Bits: 512
+    m_Bits: 768
 --- !u!114 &114000012055108772
 MonoBehaviour:
   m_ObjectHideFlags: 1

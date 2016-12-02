@@ -43,7 +43,7 @@ public class SearchArea : MonoBehaviour
     /*--当たっている間呼ばれ続ける--*/
     void OnTriggerStay2D(Collider2D c)
     {
-        //プレイヤーを発見！
+        //プレイヤーの位置を取得
         if (c.tag == "Player")
         {
             m_hitPos = c.transform.position;

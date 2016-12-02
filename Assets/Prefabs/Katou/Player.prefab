@@ -24,7 +24,7 @@ GameObject:
   - 50: {fileID: 50000013280486550}
   - 114: {fileID: 114000013664684162}
   - 114: {fileID: 114000012346336798}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -38,7 +38,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000014080056196}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.98, y: 0.06, z: 0}
+  m_LocalPosition: {x: 5.39, y: 0.23, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
