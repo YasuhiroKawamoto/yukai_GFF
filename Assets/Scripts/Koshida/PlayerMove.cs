@@ -15,7 +15,21 @@ public class PlayerMove : MonoBehaviour {
 
     private int jump_count = 0;         //ジャンプ回数
 
+    private bool move_entered;          //移動キー入力済み
+
+    private float push_interval;        //キー入力間隔
+
+    private bool dush_pend;             //ダッシュ待ち
+
     public bool is_jump = false;        //ジャンプ
+
+    public enum InputType               //入力方法
+    {
+        KEY,        //キーボード
+        PAD         //ゲームパッド
+    }
+
+    public InputType input_type;
 
     float x;
 
@@ -39,19 +53,75 @@ public class PlayerMove : MonoBehaviour {
 
     void Update()
     {
-        x = Input.GetAxis("Horizontal");
-
-        //左か右を入力したら
-        if (x != 0)
+        //入力タイプがパッド
+        if(input_type == InputType.PAD)
         {
-            move = true;
-        }
-        else
-        {
-            move = false;
+            x = Input.GetAxis("Horizontal");
+
+            //左か右を入力
+            if (x != 0)
+            {
+                move = true;
+            }
+            else
+            {
+                move = false;
+            }
         }
 
-        //ジャンプ回数が2回未満で、ジャンプ入力したら
+        //入力タイプがキーボード
+        if(input_type == InputType.KEY)
+        {
+            //右矢印キーを入力
+            if(Input.GetKey(KeyCode.RightArrow))
+            {
+                move = true;
+                move_entered = true;
+                //ダッシュ待機中にもう一度入力
+                if(dush_pend)
+                {
+                    x = 1.0f;
+                }
+                else
+                {
+                    x = 0.5f;
+                }
+            }
+            //左矢印キーを入力
+            else if(Input.GetKey(KeyCode.LeftArrow))
+            {
+                move = true;
+                move_entered = true;
+                //ダッシュ待機中にもう一度入力
+                if (dush_pend)
+                {
+                    x = -1.0f;
+                }
+                else
+                {
+                    x = -0.5f;
+                }
+            }
+            else
+            {
+                move = false;
+                //一度移動キー入力済み
+                if (move_entered)
+                {
+                    dush_pend = true;
+                    push_interval += Time.deltaTime;
+                    //0.2秒後に初期化
+                    if (push_interval > 0.2)
+                    {
+                        push_interval = 0;
+                        dush_pend = false;
+                        move_entered = false;
+                    }
+                }
+            }
+        }
+
+        //ジャンプ回数が2回未満で、ジャンプ入力
         if (jump_count < 2 && Input.GetButtonDown("Jump"))
         {
             rb2D.velocity = new Vector2(rb2D.velocity.x, jump_height);
@@ -65,12 +135,11 @@ public class PlayerMove : MonoBehaviour {
         // レイヤー名を取得
         string layerName = LayerMask.LayerToName(c.gameObject.layer);
 
-        //地面に着地したら
+        //地面に着地
         if (layerName == "Ground")
         {
             is_jump = false;
             jump_count = 0;
         }
-
     }
 }
