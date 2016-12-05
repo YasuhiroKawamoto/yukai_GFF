@@ -9,27 +9,54 @@ using System.Collections;
 
 public class SearchArea : MonoBehaviour
 {
-    Enemy_1 enemy;
+    //当たっているかどうか
+    private bool m_isDiscovery = false;
+    public bool m_IsDiscovery
+    {
+        get { return m_isDiscovery; }
+    }
 
-    //プレイヤーを発見したかどうかのフラグ
-    public bool isDiscovery = false;
+
+    //当たっている位置
+    private Vector2 m_hitPos;
+    public Vector2 m_HitPos
+    { get { return m_hitPos; } }
 
 
     /*--開始時に呼び出される--*/
     void Start ()
     {
-        enemy = GetComponentInParent<Enemy_1>();
-	}
+
+    }
 
     /*--当たった瞬間呼ばれる--*/
     void OnTriggerEnter2D(Collider2D c)
     {
-        enemy.isDiscovery = true;
+        //プレイヤーを発見！
+        if (c.tag=="Player")
+        {
+           m_isDiscovery = true;
+           m_hitPos = c.transform.position;
+        }
+    }
+
+    /*--当たっている間呼ばれ続ける--*/
+    void OnTriggerStay2D(Collider2D c)
+    {
+        //プレイヤーの位置を取得
+        if (c.tag == "Player")
+        {
+            m_hitPos = c.transform.position;
+        }
     }
 
     /*--当たって離れた時に呼ばれる--*/
     void OnTriggerExit2D(Collider2D c)
     {
-        enemy.isDiscovery = false;
+        //プレイヤーを見失う
+        if (c.tag == "Player")
+        {
+            m_isDiscovery = false;
+        }
     }
 }

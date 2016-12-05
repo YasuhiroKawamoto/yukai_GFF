@@ -11,16 +11,20 @@ public class Enemy_base : MonoBehaviour
 {
 
     //体力
+    [SerializeField]
     public int hp = 1;
 
     //速度
+    [SerializeField]
     public float speed = 0.0f;
 
     //攻撃力
+    [SerializeField]
     public int power = 1;
 
     //接触時のダメージ
-    public int contactPower = 0;
+    [SerializeField]
+    public int contactPower = 1;
 
 
     // 開始時に呼ばれる
